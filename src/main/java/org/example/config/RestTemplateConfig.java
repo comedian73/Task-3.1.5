@@ -1,6 +1,5 @@
 package org.example.config;
 
-import org.example.service.SiteService;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +11,6 @@ public class RestTemplateConfig {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder
-//                .setConnectTimeout(Duration.ofSeconds(2))
-//                .setReadTimeout(Duration.ofSeconds(3))
                 .build();
     }
 }

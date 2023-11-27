@@ -83,14 +83,13 @@ public class RestTemplateService implements SiteService {
 
     @Override
     public String getCookie() {
-        ResponseEntity<List<User>> response = restTemplate.exchange(
+        return restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
                 }
-        );
-        return response.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
+        ).getHeaders().getFirst(HttpHeaders.SET_COOKIE);
 
     }
 
