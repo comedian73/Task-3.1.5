@@ -37,7 +37,7 @@ public class RestTemplateService implements SiteService {
     }
 
     @Override
-    public void addUser(User user) {
+    public String addUser(User user) {
         HttpEntity<String> request =
                 new HttpEntity<>(setUser(user).toString(), setHeaders());
 
@@ -48,11 +48,11 @@ public class RestTemplateService implements SiteService {
                         request,
                         String.class
                 );
-        System.out.println("код добавления" + userResultJsonStr.getHeaders() + "\n");
+        return userResultJsonStr.getBody();
     }
 
     @Override
-    public void changeUser(User user) {
+    public String changeUser(User user) {
         HttpEntity<String> request =
                 new HttpEntity<>(setUser(user).toString(), setHeaders());
 
@@ -63,11 +63,11 @@ public class RestTemplateService implements SiteService {
                         request,
                         String.class
                 );
-        System.out.println("код изменения" + userResultJsonStr.getHeaders() + "\n");
+        return userResultJsonStr.getBody();
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public String deleteUser(Long id) {
         HttpEntity<String> request =
                 new HttpEntity<>(setHeaders());
 
@@ -78,17 +78,20 @@ public class RestTemplateService implements SiteService {
                         request,
                         String.class
                 );
-        System.out.println("код удаления" + userResultJsonStr.getHeaders() + "\n");
+        return userResultJsonStr.getBody();
     }
 
     @Override
     public String getCookie() {
-        return restTemplate.exchange(
+        ResponseEntity<List<User>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 null,
-                String.class
-        ).getHeaders().getFirst(HttpHeaders.SET_COOKIE);
+                new ParameterizedTypeReference<>() {
+                }
+        );
+        return response.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
+
     }
 
     private HttpHeaders setHeaders() {

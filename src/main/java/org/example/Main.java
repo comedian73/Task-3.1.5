@@ -7,10 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.util.List;
-
-
-//@Configuration
 @SpringBootApplication
 public class Main {
     @SneakyThrows
@@ -18,13 +14,13 @@ public class Main {
         ApplicationContext ctx = SpringApplication.run(Main.class, args);
         SiteService siteService = ctx.getBean(SiteService.class);
 
-        siteService.getUserList();
+        String one = siteService.addUser(new User(3L, "James", "Brown", (byte) 25));
 
-        siteService.addUser(new User(3L, "James", "Brown", (byte) 25));
+        String two = siteService.changeUser(new User(3L, "Thomas", "Shelby", (byte) 25));
 
-        siteService.changeUser(new User(3L, "Thomas", "Shelby", (byte) 25));
+        String tree = siteService.deleteUser(3L);
 
-        siteService.deleteUser(3L);
+        System.out.println(one + two + tree);
 
     }
 }
