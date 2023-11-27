@@ -41,14 +41,14 @@ public class RestTemplateService implements SiteService {
         HttpEntity<String> request =
                 new HttpEntity<>(setUser(user).toString(), setHeaders());
 
-        ResponseEntity<String> personResultAsJsonStr =
+        ResponseEntity<String> userResultJsonStr =
                 restTemplate.exchange(
                         url,
                         HttpMethod.POST,
                         request,
                         String.class
                 );
-        System.out.println("код добавления" + personResultAsJsonStr.getHeaders() + "\n");
+        System.out.println("код добавления" + userResultJsonStr.getHeaders() + "\n");
     }
 
     @Override
@@ -56,14 +56,14 @@ public class RestTemplateService implements SiteService {
         HttpEntity<String> request =
                 new HttpEntity<>(setUser(user).toString(), setHeaders());
 
-        ResponseEntity<String> personResultAsJsonStr =
+        ResponseEntity<String> userResultJsonStr =
                 restTemplate.exchange(
                         url,
                         HttpMethod.PUT,
                         request,
                         String.class
                 );
-        System.out.println("код изменения" + personResultAsJsonStr.getHeaders() + "\n");
+        System.out.println("код изменения" + userResultJsonStr.getHeaders() + "\n");
     }
 
     @Override
@@ -71,14 +71,14 @@ public class RestTemplateService implements SiteService {
         HttpEntity<String> request =
                 new HttpEntity<>(setHeaders());
 
-        ResponseEntity<String> personResultAsJsonStr =
+        ResponseEntity<String> userResultJsonStr =
                 restTemplate.exchange(
                         url + "/" + id,
                         HttpMethod.DELETE,
                         request,
                         String.class
                 );
-        System.out.println("код удаления" + personResultAsJsonStr.getHeaders() + "\n");
+        System.out.println("код удаления" + userResultJsonStr.getHeaders() + "\n");
     }
 
     @Override
